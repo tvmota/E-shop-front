@@ -5,8 +5,15 @@ import App from './App'
 import router from './router'
 import store from './store'
 import { isEmpty } from 'lodash'
-Vue.config.productionTip = false
+import axios from 'axios'
 
+// Vue.config.productionTip = false
+Vue.config.productionTip = true
+
+// Vue.prototype.$axios = axios.create({ baseURL: 'http://localhost:3333' })
+Vue.prototype.$axios = axios
+
+Vue.prototype.$eventBus = new Vue()
 /* eslint-disable no-new */
 
 router.beforeEach((to, from, next) => {

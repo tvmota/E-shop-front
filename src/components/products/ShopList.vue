@@ -1,6 +1,6 @@
 <script type="text/javascript">
   import ShopItem from './ShopItem.vue'
-  import { chunk } from 'lodash'
+  import { chunk, filter } from 'lodash'
 
   export default {
     name: 'Shop-List',
@@ -13,8 +13,22 @@
     },
     computed: {
       products () {
-        return chunk(this.$store.state.products, 4)
+        return chunk(this.$store.getters.getProducts, 4)
+      },
+      category () {
+        return this.$store.getters.getCategory
       }
+    },
+    created () {
+      this.$axios.get('products').then(resp => {
+        if (this.category) {
+          this.$store.commit('SET_PRODUCTS', filter(resp.data, {'categoria': this.category}))
+          return
+        }
+        this.$store.commit('SET_PRODUCTS', resp.data)
+      }).catch(err => {
+        console.log(err)
+      })
     }
   }
 </script>

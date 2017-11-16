@@ -1,5 +1,4 @@
 <script type="text/javascript">
-  import axios from 'axios'
   import ShopAlert from '../alert/ShopAlert.vue'
 
   export default {
@@ -9,7 +8,7 @@
     },
     data () {
       return {
-        alert: { class: 'alert alert-dismissible fade', msg: '', show: false },
+        alert: { class: '', msg: '', show: false },
         loginData: { user: '', pwd: '' }
       }
     },
@@ -19,12 +18,12 @@
         let form = self.$refs.loginForm
 
         if (form.checkValidity()) {
-          axios.post(`/login`, self.loginData).then(resp => {
+          self.$axios.post(`login`, self.loginData).then(resp => {
             self.$store.commit('SET_USER_TKN', resp.data)
             this.$router.push('/admin')
           }).catch(err => {
             self.alert.msg = err.response.data.msg
-            self.alert.class += ' alert-danger show'
+            self.alert.class = 'alert alert-danger alert-dismissible fade show'
             self.alert.show = true
             console.log(err.response.data)
           })
@@ -71,6 +70,9 @@
         <br>
         <shop-alert :msgClass="alert.class" :msg="alert.msg" :visibility="alert.show" @update:visibility="val => alert.show = val"></shop-alert>
       </form>
+      <div class="card-footer">
+          teste
+        </div>
     </div>
   </div>
 </template>

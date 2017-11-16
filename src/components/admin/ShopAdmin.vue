@@ -6,6 +6,9 @@
     name: 'Shop-Admin',
     components: {
       ShopHeader, ShopFooter
+    },
+    created () {
+      this.$store.commit('SET_CATEGORY', self.$route.params.categoria)
     }
   }
 </script>

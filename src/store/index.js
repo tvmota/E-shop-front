@@ -5,14 +5,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    apiUrl: 'http://localhost:3333',
     cart: [],
     user: {},
-    products: [
-      { id: 1, nome: 'Produto X', descricao: 'ashdksahdkjsahdkjsahdkjashd', valor: 100, categoria: 'Categoria A', img: 'http://via.placeholder.com/318x180' },
-      { id: 2, nome: 'Produto Y', descricao: 'ashdksahdkjsahdkjsahdkjashd', valor: 160, categoria: 'Categoria A', img: 'http://via.placeholder.com/318x180' },
-      { id: 3, nome: 'Produto Z', descricao: 'ashdksahdkjsahdkjsahdkjashd', valor: 190, categoria: 'Categoria A', img: 'http://via.placeholder.com/318x180' }
-    ]
+    products: [],
+    category: ''
   },
   mutations: {
     SET_USER_TKN (state, obj) {
@@ -31,6 +27,9 @@ export default new Vuex.Store({
     SET_PRODUCTS (state, obj) {
       state.products = obj
     },
+    SET_CATEGORY (state, param) {
+      state.category = param
+    },
     ADD_ITEM_CART (state, obj) {
       state.cart.unshift(obj)
     },
@@ -40,10 +39,10 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    getUrl: state => state.apiUrl,
     getUser: state => state.user,
     getProducts: state => state.products,
-    getCart: state => state.cart
+    getCart: state => state.cart,
+    getCategory: state => state.category
   },
   actions: {
     setDefaultUser ({ commit }) {

@@ -8,6 +8,7 @@ function load (component) {
 }
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/login',

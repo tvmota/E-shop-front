@@ -16,6 +16,7 @@
       addToCart (itemCart) {
         let self = this
         self.$store.commit('ADD_ITEM_CART', itemCart)
+        self.$eventBus.$emit('add-cart')
       },
       editItem (id) {
         this.$router.push({path: `admin/edit/${id}`})
@@ -27,9 +28,9 @@
     <div class="card">
       <img class="card-img-top" :src="item.img" alt="">
       <div class="card-body">
-        <h4 class="card-title">{{ item.nome }}</h4>
+        <h4 class="card-title text-capitalize">{{ item.nome }}</h4>
         <h6 class="card-subtitle mb-2 text-muted">{{ item.categoria }}</h6>
-        <p class="card-text">{{ item.descricao }}</p>
+        <p class="card-text font-weight-light">{{ item.descricao }}</p>
         <div class="row">
           <div class="col-10 align-bottom">
             <br>

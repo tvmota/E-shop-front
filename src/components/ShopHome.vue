@@ -1,7 +1,6 @@
 <script type="text/javascript">
   import ShopHeader from './ShopHeader.vue'
   import ShopFooter from './ShopFooter.vue'
-  import axios from 'axios'
 
   export default {
     name: 'Shop-Home',
@@ -11,12 +10,7 @@
     created () {
       let self = this
       self.$store.dispatch('setDefaultUser')
-
-      axios.get(`/products`).then(resp => {
-        self.$store.commit('SET_PRODUCTS', resp.data)
-      }).catch(err => {
-        console.log(err)
-      })
+      self.$store.commit('SET_CATEGORY', self.$route.params.categoria)
     }
   }
 </script>
